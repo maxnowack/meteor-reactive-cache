@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - "4.8.0"
+  - "4.8.4"
 
 addons:
   apt:
@@ -13,7 +13,7 @@ install:
   - npm install
 
 before_install:
-  - curl https://install.meteor.com/?release=1.4.4.1 | /bin/sh
+  - curl https://install.meteor.com/?release=1.5.1 | /bin/sh
   - export PATH="$HOME/.meteor:$PATH"
 
 script:
