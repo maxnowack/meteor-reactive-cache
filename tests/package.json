@@ -22,7 +22,7 @@
     }
   },
   "dependencies": {
-    "babel-runtime": "6.23.0",
+    "@babel/runtime": "^7.0.0-beta.46",
     "meteor-node-stubs": "0.2.6"
   },
   "devDependencies": {
