@@ -53,6 +53,36 @@ if (Meteor.isClient) {
       }, 50);
     });
 
+    it('should be reactive with complex values', () => {
+      const reactiveDict = new ReactiveDict();
+      reactiveDict.set('foo', { date: new Date('2018-01-01') });
+      let numGets = 0;
+      const field = reactiveField((key) => {
+        numGets += 1;
+        return reactiveDict.get(key);
+      }, {
+        timeout: 10,
+      });
+
+      let runs = 0;
+      const computation = Tracker.autorun(() => {
+        runs += 1;
+        const value = field('foo'); // eslint-disable-line
+      });
+
+      chai.assert.instanceOf(field('foo').date, Date);
+      chai.assert.equal(numGets, 1);
+      chai.assert.equal(runs, 1);
+
+      reactiveDict.set('foo', { date: new Date('2018-01-02') });
+      Tracker.flush({ _throwFirstError: true });
+      chai.assert.instanceOf(field('foo').date, Date);
+      chai.assert.equal(numGets, 2);
+      chai.assert.equal(runs, 2);
+
+      computation.stop();
+    });
+
     it('should work with multiple parameters', () => {
       const reactiveDict = new ReactiveDict();
       reactiveDict.set('foofoo', '000');
