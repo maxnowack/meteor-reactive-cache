@@ -7,7 +7,7 @@
     "prepublish": "./node_modules/.bin/babel src -d dist",
     "lint": "./node_modules/.bin/eslint src",
     "copy": "npm link && cd tests && npm link meteor-reactive-cache",
-    "test": "npm run copy && cd tests && TEST_BROWSER_DRIVER=nightmare meteor test -p 3100 --once --driver-package dispatch:mocha"
+    "test": "npm run copy && cd tests && TEST_BROWSER_DRIVER=nightmare meteor test -p 3100 --once --driver-package meteortesting:mocha"
   },
   "repository": {
     "type": "git",
