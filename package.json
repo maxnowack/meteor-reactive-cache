@@ -1,6 +1,6 @@
 {
   "name": "meteor-reactive-cache",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Utilities for caching reactive data",
   "main": "dist/index.js",
   "scripts": {
