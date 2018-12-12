@@ -13,9 +13,10 @@ export default class ReactiveCache {
   }
   checkDeletion(key) {
     const dep = this.ensureDependency(key);
-    if (dep.hasDependents()) return;
+    if (dep.hasDependents()) return false;
     delete this.values[key];
     delete this.deps[key];
+    return true;
   }
   clear() {
     Object.keys(this.values).forEach(key => this.del(key));
@@ -23,7 +24,7 @@ export default class ReactiveCache {
   del(key) {
     const dep = this.ensureDependency(key);
     delete this.values[key];
-    this.checkDeletion();
+    if (this.checkDeletion(key)) return;
     dep.changed();
   }
   set(key, data, bypassCompare) {

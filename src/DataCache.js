@@ -27,6 +27,10 @@ export default class DataCache {
   }
   checkStop(key) {
     if (this.cache.ensureDependency(key).hasDependents()) return;
+    if (this.timeouts[key]) {
+      clearTimeout(this.timeouts[key]);
+      delete this.timeouts[key];
+    }
     this.timeouts[key] = setTimeout(bindEnvironment(() => {
       if (!this.computations[key]) return;
       this.computations[key].stop();
